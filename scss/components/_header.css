@@ -32,13 +32,9 @@ body {
 
 .logo {
   font-size: 2.5rem;
-  color: var(--main-color);
+  color: white;
   font-weight: 600;
   margin-right: auto;
-}
-
-.header a {
-  color: white;
 }
 
 .navbar a {

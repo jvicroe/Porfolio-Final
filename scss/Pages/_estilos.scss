@@ -1,7 +1,64 @@
 // comentario de sass
 /* Estilos de paginas */
 
+/* Variables */
+$main-color: #754ef9;
+$shadow-color: rgba(0, 0, 0, .2);
+$white-color: #fdfdfd;
+$bg-color: #fdfdfd;
+$text-color: #333;
+
+/* Mixins */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($time) {
+  transition: $time ease;
+}
+
+@mixin box($padding, $background, $shadow) {
+  padding: $padding;
+  background: $background;
+  box-shadow: 0 0.2rem 0.5rem $shadow;
+}
+
+/* Extendables */
+
+%circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+%btn {
+  display: inline-block;
+  padding: 1.2rem 2.8rem;
+  background: $main-color;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.2rem 0.5rem $shadow-color;
+  font-size: 1.6rem;
+  color: $white-color;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  border: 0.2rem solid transparent;
+  @include transition(0.5s); &:hover {
+    background: transparent;
+    color: $main-color;
+    border-color: $main-color;
+  }
+}
+
+%heading {
+  font-size: 4.5rem;
+  text-align: center;
+}
+
 /* Home */
+
 section {
   min-height: 100vh;
   padding: 10rem 7% 2rem;
@@ -11,10 +68,11 @@ section {
   display: flex;
   align-items: center;
 }
-.home {
-  @extend .home, .home-content;
+
+.home .home-content {
   max-width: 44rem;
 }
+
 .home-content h3 {
   font-size: 3.2rem;
   font-weight: 700;
@@ -38,38 +96,22 @@ section {
   width: 4rem;
   height: 4rem;
   background: transparent;
-  border: .2rem solid var(--main-color);
+  border: .2rem solid $main-color;
   border-radius: 50%;
-  box-shadow: 0 .2rem .5rem var(--shadow-color);
+  box-shadow: 0 .2rem .5rem $shadow-color;
   font-size: 2rem;
-  color: var(--main-color);
+  color: $main-color;
   margin: 2.5rem 1.5rem 3rem 0;
   transition: .5s ease;
 }
 
 .home-content .social-media a:hover {
-  background: var(--main-color);
-  color: var(--white-color);
+  background: $main-color;
+  color: $white-color;
 }
 
 .btn {
-  display: inline-block;
-  padding: 1.2rem 2.8rem;
-  background: var(--main-color);
-  border-radius: .6rem;
-  box-shadow: 0 .2rem .5rem var(--shadow-color);
-  font-size: 1.6rem;
-  color: var(--white-color);
-  letter-spacing: .1rem;
-  font-weight: 600;
-  border: .2rem solid transparent;
-  transition: .5s ease;
-}
-
-.btn:hover {
-  background: transparent;
-  color: var(--main-color);
-  border-color: var(--main-color);
+  @extend %btn;
 }
 
 .home .profession-container {
@@ -97,53 +139,51 @@ section {
 
 @keyframes professionRotate {
 
-  0%, 20% {
-    transform: rotate(0deg);
+  0%,
+  20% {
+      transform: rotate(0deg);
   }
 
-  25%, 45% {
-    transform: rotate(-90deg);
+  25%,
+  45% {
+      transform: rotate(-90deg);
   }
 
-  50%, 70% {
-    transform: rotate(-180deg);
+  50%,
+  70% {
+      transform: rotate(-180deg);
   }
 
-  75%, 95% {
-    transform: rotate(-270deg);
+  75%,
+  95% {
+      transform: rotate(-270deg);
   }
 
   100% {
-    transform: rotate(-360deg);
+      transform: rotate(-360deg);
   }
 }
 
-.home {
-  @extend .home, .profession-box, .profession;
+.home .profession-box .profession {
   position: absolute;
   left: 0;
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: var(--main-color);
+  color: $main-color;
   transform: rotate(calc(360deg / 4 * var(--i)));
   transform-origin: 384px;
-  background: var(--bg-color);
+  background: $bg-color;
   padding: 13px 0;
 }
 
-@mixin home {
+.home .profession-box .profession:nth-child(1) i {
   margin-right: 15px;
 }
-.home .profession-box .profession:nth-child(1) i {
-  @include home;
-}
 
-@mixin home {
+.home .profession-box .profession:nth-child(2),
+.home .profession-box .profession:nth-child(4) {
   padding-bottom: 20px;
-}
-.home .profession-box .profession:nth-child(2), .home .profession-box .profession:nth-child(4) {
-  @include home;
 }
 
 .home .profession i {
@@ -159,7 +199,7 @@ section {
 .home .profession-box .circle {
   width: 560px;
   height: 560px;
-  border: 3px solid var(--main-color);
+  border: 3px solid $main-color;
   border-radius: 50%;
   z-index: -1;
 }
@@ -170,9 +210,9 @@ section {
   right: 0;
   width: 0;
   height: 0;
-  border-top: 50vh solid var(--main-color);
-  border-right: 384px solid var(--main-color);
-  border-bottom: 50vh solid var(--main-color);
+  border-top: 50vh solid $main-color;
+  border-right: 384px solid $main-color;
+  border-bottom: 50vh solid $main-color;
   border-left: 384px solid transparent;
 }
 
@@ -189,16 +229,18 @@ span {
   color: var(--main-color);
 }
 
-/* Acerca de mi */ 
+/* Acerca de mí */
 .about {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   gap: 4rem;
 }
 
 .about-img img {
   width: 40vw;
+}
+
+.heading {
+  @extend %heading;
 }
 
 .about-content h2 {
@@ -215,13 +257,8 @@ span {
   margin: 2rem 0 3rem;
 }
 
-.heading {
-  font-size: 4.5rem;
-  text-align: center;
-}
-
 /* Servicios */
-services {
+.services {
   min-height: auto;
   padding-bottom: 10rem;
 }
@@ -231,42 +268,34 @@ services {
 }
 
 .services .services-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
 .services-container .services-box {
   flex: 1 1 30rem;
-  background: var(--bg-color);
-  padding: 3rem 2rem 4rem;
+  @include box(3rem 2rem 4rem, $bg-color, $shadow-color);
   border-radius: 2rem;
-  box-shadow: 0 0.1rem 0.5rem var(--shadow-color);
   text-align: center;
-  border-top: 0.6rem solid var(--main-color);
-  border-bottom: 0.6rem solid var(--main-color);
-  transition: 0.5s ease;
-}
-
-.services-container .services-box:hover {
-  box-shadow: 0 0.1rem 2rem var(--shadow-color);
-  transform: scale(1.02);
+  border-top: 0.6rem solid $main-color;
+  border-bottom: 0.6rem solid $main-color;
+  @include transition(0.5s); &:hover {
+    box-shadow: 0 0.1rem 2rem $shadow-color;
+    transform: scale(1.02);
+  }
 }
 
 .services-box i {
   font-size: 7rem;
-  color: var(--main-color);
+  color: $main-color;
 }
 
 .services-box h3 {
   font-size: 2.6rem;
-  transition: 0.5s ease;
-}
-
-.services-box:hover h3 {
-  color: var(--main-color);
+  @include transition(0.5s); &:hover {
+    color: $main-color;
+  }
 }
 
 .services-box p {
@@ -275,7 +304,7 @@ services {
 }
 
 /* Portafolio */
-portfolio {
+.portfolio {
   min-height: auto;
   padding-bottom: 10rem;
 }
@@ -293,7 +322,7 @@ portfolio {
 
 .portfolio-container .portfolio-box {
   position: relative;
-  display: flex;
+  @include flex-center;
   border-radius: 2rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -301,11 +330,10 @@ portfolio {
 
 .portfolio-box img {
   width: 100%;
-  transition: 0.5s ease;
-}
-
-.portfolio-box:hover img {
-  transform: scale(1.1);
+  @include transition(0.5s);
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .portfolio-box .portfolio-layer {
@@ -314,20 +342,17 @@ portfolio {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.1), var(--main-color));
-  color: var(--white-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), $main-color);
+  color: $white-color;
+  @include flex-center;
   flex-direction: column;
   text-align: center;
   padding: 0 4rem;
   opacity: 0;
-  transition: 0.5s ease;
-}
-
-.portfolio-box:hover .portfolio-layer {
-  opacity: 1;
+  @include transition(0.5s);
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .portfolio-layer h4 {
@@ -340,23 +365,19 @@ portfolio {
 }
 
 .portfolio-layer a {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  @extend %circle;
   width: 5rem;
   height: 5rem;
-  background: var(--white-color);
-  border-radius: 50%;
+  background: $white-color;
+  i {
+    font-size: 2rem;
+    color: #333;
+  }
 }
 
-.portfolio-layer a i {
-  font-size: 2rem;
-  color: #333;
-}
-
+/* Testimonios */
 .testimonial-container {
-  display: flex;
-  align-items: center;
+  @include flex-center;
   flex-direction: column;
   width: 100%;
   padding: 5rem 1rem;
@@ -376,15 +397,13 @@ portfolio {
 }
 
 .testimonial-content .testimonial-slide {
+  @include box(3rem 5rem, $bg-color, $shadow-color);
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: var(--bg-color);
   border-radius: 2rem;
-  box-shadow: 0 0.1rem 0.5rem var(--shadow-color);
-  padding: 3rem 5rem;
-  border-top: 0.8rem solid var(--main-color);
-  border-bottom: 0.8rem solid var(--main-color);
+  border-top: 0.8rem solid $main-color;
+  border-bottom: 0.8rem solid $main-color;
 }
 
 .testimonial-slide img {
@@ -392,8 +411,8 @@ portfolio {
   height: 14rem;
   object-fit: cover;
   border-radius: 50%;
-  border: 0.5rem solid var(--bg-color);
-  outline: 0.5rem solid var(--main-color);
+  border: 0.5rem solid $bg-color;
+  outline: 0.5rem solid $main-color;
 }
 
 .testimonial-slide h3 {
@@ -408,7 +427,7 @@ portfolio {
 
 .testimonial-box .swiper-button-next,
 .testimonial-box .swiper-button-prev {
-  color: var(--main-color);
+  color: $main-color;
 }
 
 .testimonial-box .swiper-button-next {
@@ -424,8 +443,9 @@ portfolio {
 }
 
 .testimonial-box .swiper-pagination-bullet-active {
-  background: var(--main-color);
+  background: $main-color;
 }
+
 /* Contacto */
 .contact {
   min-height: auto;
@@ -444,7 +464,7 @@ portfolio {
 }
 
 .contact form .input-box {
-  display: flex;
+  @include flex-center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -454,11 +474,11 @@ portfolio {
   width: 100%;
   padding: 1.5rem;
   font-size: 1.6rem;
-  color: var(--text-color);
-  background: var(--bg-color);
-  border-radius: .8rem;
-  margin: .7rem 0;
-  box-shadow: 0 .1rem .5rem var(--shadow-color);
+  color: $text-color;
+  background: $bg-color;
+  border-radius: 0.8rem;
+  margin: 0.7rem 0;
+  box-shadow: 0 0.1rem 0.5rem $shadow-color;
 }
 
 .contact form .input-box input {
@@ -472,6 +492,5 @@ portfolio {
 .contact form .btn {
   margin-top: 2rem;
   cursor: pointer;
+  @extend %btn;
 }
-
-/*# sourceMappingURL=main.css.map */
