@@ -11,7 +11,7 @@
   font-family: "Montserrat Alternates", sans-serif;
 }
 
-/*# sourceMappingURL=main.css.map */
+
 /* Variables */
 :root {
   --bg-color: #fdfdfd;
@@ -33,7 +33,7 @@
   --shadow-color: rgba(0, 0, 0, 0.7);
 }
 
-/*# sourceMappingURL=main.css.map */
+
 /* Header */
 html {
   font-size: 62.5%;
@@ -125,7 +125,7 @@ body {
   display: none;
 }
 
-/*# sourceMappingURL=main.css.map */
+
 /* Estilos de paginas */
 /* Home */
 section {
@@ -590,7 +590,7 @@ portfolio {
   cursor: pointer;
 }
 
-/*# sourceMappingURL=main.css.map */
+
 /* Footer */
 .footer {
   display: flex;
@@ -628,7 +628,7 @@ portfolio {
   color: #333;
 }
 
-/*# sourceMappingURL=main.css.map */
+
 /* Media Queries */
 @media (max-width: 1200px) {
   html {
@@ -860,5 +860,7 @@ portfolio {
     border-radius: 20px;
   }
 }
+
+
 
 /*# sourceMappingURL=main.css.map */

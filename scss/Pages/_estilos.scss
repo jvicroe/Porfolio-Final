@@ -1,7 +1,47 @@
 // comentario de sass
-/* Estilos de paginas */
+
+// Mixins para los estilos que se repiten con variaciones 
+
+@mixin button-styles($bg-color, $font-color, $padding) {
+  background-color: $bg-color;
+  color: $font-color;
+  padding: $padding;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.2rem 0.5rem var(--shadow-color);
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  border: 0.2rem solid transparent;
+  transition: 0.5s ease;
+}
+
+@mixin home-content-typography($font-size, $font-weight, $line-height: normal, $margin-bottom: 0) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  margin-bottom: $margin-bottom;
+}
+
+@mixin social-media-styles($width, $height, $font-size) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: $width;
+  height: $height;
+  background: transparent;
+  border: 0.2rem solid var(--main-color);
+  border-radius: 50%;
+  box-shadow: 0 0.2rem 0.5rem var(--shadow-color);
+  font-size: $font-size;
+  color: var(--main-color);
+  margin: 2.5rem 1.5rem 3rem 0;
+  transition: 0.5s ease;
+}
+
+/* Estilo de páginas */
 
 /* Home */
+
 section {
   min-height: 100vh;
   padding: 10rem 7% 2rem;
@@ -11,20 +51,18 @@ section {
   display: flex;
   align-items: center;
 }
-.home {
-  @extend .home, .home-content;
+
+.home-content {
   max-width: 44rem;
+  @extend .home;
 }
+
 .home-content h3 {
-  font-size: 3.2rem;
-  font-weight: 700;
-  line-height: .3;
+  @include home-content-typography(3.2rem, 700, .3);
 }
 
 .home-content h1 {
-  font-size: 5.6rem;
-  font-weight: 700;
-  margin-bottom: .3rem;
+  @include home-content-typography(5.6rem, 700, normal, .3rem);
 }
 
 .home-content p {
@@ -32,19 +70,7 @@ section {
 }
 
 .home-content .social-media a {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 4rem;
-  height: 4rem;
-  background: transparent;
-  border: .2rem solid var(--main-color);
-  border-radius: 50%;
-  box-shadow: 0 .2rem .5rem var(--shadow-color);
-  font-size: 2rem;
-  color: var(--main-color);
-  margin: 2.5rem 1.5rem 3rem 0;
-  transition: .5s ease;
+  @include social-media-styles(4rem, 4rem, 2rem);
 }
 
 .home-content .social-media a:hover {
@@ -53,17 +79,7 @@ section {
 }
 
 .btn {
-  display: inline-block;
-  padding: 1.2rem 2.8rem;
-  background: var(--main-color);
-  border-radius: .6rem;
-  box-shadow: 0 .2rem .5rem var(--shadow-color);
-  font-size: 1.6rem;
-  color: var(--white-color);
-  letter-spacing: .1rem;
-  font-weight: 600;
-  border: .2rem solid transparent;
-  transition: .5s ease;
+  @include button-styles(var(--main-color), var(--white-color), 1.2rem 2.8rem);
 }
 
 .btn:hover {
@@ -96,30 +112,24 @@ section {
 }
 
 @keyframes professionRotate {
-
   0%, 20% {
     transform: rotate(0deg);
   }
-
   25%, 45% {
     transform: rotate(-90deg);
   }
-
   50%, 70% {
     transform: rotate(-180deg);
   }
-
   75%, 95% {
     transform: rotate(-270deg);
   }
-
   100% {
     transform: rotate(-360deg);
   }
 }
 
-.home {
-  @extend .home, .profession-box, .profession;
+.home .profession-box .profession {
   position: absolute;
   left: 0;
   display: flex;
@@ -132,18 +142,13 @@ section {
   padding: 13px 0;
 }
 
-@mixin home {
+.home .profession-box .profession:nth-child(1) i {
   margin-right: 15px;
 }
-.home .profession-box .profession:nth-child(1) i {
-  @include home;
-}
 
-@mixin home {
+.home .profession-box .profession:nth-child(2), 
+.home .profession-box .profession:nth-child(4) {
   padding-bottom: 20px;
-}
-.home .profession-box .profession:nth-child(2), .home .profession-box .profession:nth-child(4) {
-  @include home;
 }
 
 .home .profession i {
@@ -189,7 +194,9 @@ span {
   color: var(--main-color);
 }
 
+
 /* Acerca de mi */ 
+
 .about {
   display: flex;
   justify-content: center;
@@ -221,7 +228,8 @@ span {
 }
 
 /* Servicios */
-services {
+
+.services {
   min-height: auto;
   padding-bottom: 10rem;
 }
@@ -275,7 +283,8 @@ services {
 }
 
 /* Portafolio */
-portfolio {
+
+.portfolio {
   min-height: auto;
   padding-bottom: 10rem;
 }
@@ -426,7 +435,9 @@ portfolio {
 .testimonial-box .swiper-pagination-bullet-active {
   background: var(--main-color);
 }
+
 /* Contacto */
+
 .contact {
   min-height: auto;
   padding-bottom: 7rem;
@@ -456,9 +467,9 @@ portfolio {
   font-size: 1.6rem;
   color: var(--text-color);
   background: var(--bg-color);
-  border-radius: .8rem;
-  margin: .7rem 0;
-  box-shadow: 0 .1rem .5rem var(--shadow-color);
+  border-radius: 0.8rem;
+  margin: 0.7rem 0;
+  box-shadow: 0 0.1rem 0.5rem var(--shadow-color);
 }
 
 .contact form .input-box input {
@@ -473,5 +484,4 @@ portfolio {
   margin-top: 2rem;
   cursor: pointer;
 }
-
 /*# sourceMappingURL=main.css.map */

@@ -1,5 +1,46 @@
 // comentario de sass
+
+// Mixins y extensiones para multiples elementos pero con pequeñas variaciones. 
+
+@mixin transition($property, $duration, $timing-function) {
+    transition: $property $duration $timing-function;
+}
+
+@mixin flex-container($direction: row, $align: center, $justify: flex-start) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin font-style($size, $color, $weight: normal) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+}
+
+// Extensiones
+
+%fixed-position {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+%sticky-background {
+    background: var(--bg-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+}
+
+%transition {
+    @include transition(all, .5s, ease);
+}
+
+
 /* Header */
+
 html {
     font-size: 62.5%;
     overflow-x: hidden;
@@ -8,44 +49,34 @@ html {
 body {
     background: var(--bg-color);
     color: var(--text-color);
-    display: flex;
-    flex-direction: column;
+    @include flex-container(column);
     min-height: 100vh;
 }
 
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    @extend %fixed-position;
     padding: 2rem 7%;
     background: #48319A;
-    display: flex;
-    align-items: center;
-    z-index: 100;
-    transition: .5s;
+    @include flex-container(row);
+    @extend %transition;
 }
+
 .header.sticky {
-    background: var(--bg-color);
-    box-shadow: 0 .1rem 1rem var(--shadow-color);
+    @extend %sticky-background;
 }
 
 .logo {
-    font-size: 2.5rem;
-    color: var(--main-color);
-    font-weight: 600;
+    @include font-style(2.5rem, var(--main-color), 600);
     margin-right: auto;
 }
 
-.header a{
+.header a {
     color: white;
 }
 
 .navbar a {
     position: relative;
-    font-size: 1.7rem;
-    color: var(--white-color);
-    font-weight: 500;
+    @include font-style(1.7rem, var(--white-color), 500);
     margin-right: 3.5rem;
 }
 
@@ -73,8 +104,7 @@ body {
 }
 
 #darkMode-icon {
-    font-size: 2.4rem;
-    color: var(--white-color);
+    @include font-style(2.4rem, var(--white-color));
     cursor: pointer;
 }
 
@@ -84,8 +114,7 @@ body {
 }
 
 #menu-icon {
-    font-size: 3.6rem;
-    color: var(--text-color);
+    @include font-style(3.6rem, var(--text-color));
     display: none;
 }
 
