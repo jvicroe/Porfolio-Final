@@ -1,0 +1,63 @@
+// comentario de sass
+
+// Mixins para las propiedades de estilo que se repiten o que pueden variar ligeramente entre diferentes elementos.
+
+@mixin flex-container($direction: row, $justify: flex-start, $align: center, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
+
+@mixin font-style($size, $color, $weight: normal) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+}
+
+@mixin button-style($padding, $bg-color, $border-radius, $border, $outline: none) {
+    padding: $padding;
+    background: $bg-color;
+    border-radius: $border-radius;
+    border: $border;
+    outline: $outline;
+}
+
+@mixin transition($property, $duration, $timing-function) {
+    transition: $property $duration $timing-function;
+}
+
+// Exensiones
+
+%flex-between-center-wrap {
+    @include flex-container(row, space-between, center, wrap);
+}
+
+/* Footer */
+.footer {
+    @extend %flex-between-center-wrap;
+    padding: 2rem 7%;
+    background: #48319A;
+    margin-top: auto;
+}
+
+.footer-text p {
+    @include font-style(1.6rem, var(--white-color));
+}
+
+.footer-iconTop a {
+    @include flex-container(row, center, center);
+    @include button-style(.8rem, var(--white-color), .8rem, .2rem solid var(--main-color), .2rem solid transparent);
+    @include transition(all, .5s, ease);
+}
+
+.footer-iconTop a:hover {
+    outline-color: var(--white-color);
+}
+
+.footer-iconTop a i {
+    @include font-style(2.4rem, #333);
+}
+
+/*# sourceMappingURL=main.css.map */

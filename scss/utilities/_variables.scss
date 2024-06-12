@@ -1,0 +1,43 @@
+// comentario de sass
+
+//Mixins
+
+@mixin selection-style($background, $color) {
+  &::selection {
+      background: $background;
+      color: $color;
+  }
+}
+
+@mixin dark-mode($bg-color, $text-color, $shadow-color) {
+  --bg-color: $bg-color;
+  --text-color: $text-color;
+  --shadow-color: $shadow-color;
+}
+
+// Extensiones
+%selection-default {
+  @include selection-style(var(--main-color), var(--bg-color));
+}
+
+
+/* Variables */
+
+:root {
+  --bg-color: #fdfdfd;
+  --text-color: #333;
+  --main-color: #754ef9;
+  --white-color: #fdfdfd;
+  --shadow-color: rgba(0, 0, 0, .2);
+}
+
+/* Header */
+* {
+  @extend %selection-default;
+}
+
+.dark-mode {
+  @include dark-mode(#0b061f, #fdfdfd, rgba(0, 0, 0, .7));
+}
+
+/*# sourceMappingURL=main.css.map */

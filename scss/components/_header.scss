@@ -1,0 +1,121 @@
+// comentario de sass
+
+// Mixins y extensiones para multiples elementos pero con pequeñas variaciones. 
+
+@mixin transition($property, $duration, $timing-function) {
+    transition: $property $duration $timing-function;
+}
+
+@mixin flex-container($direction: row, $align: center, $justify: flex-start) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin font-style($size, $color, $weight: normal) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+}
+
+// Extensiones
+
+%fixed-position {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+%sticky-background {
+    background: var(--bg-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+}
+
+%transition {
+    @include transition(all, .5s, ease);
+}
+
+
+/* Header */
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    @include flex-container(column);
+    min-height: 100vh;
+}
+
+.header {
+    @extend %fixed-position;
+    padding: 2rem 7%;
+    background: #48319A;
+    @include flex-container(row);
+    @extend %transition;
+}
+
+.header.sticky {
+    @extend %sticky-background;
+}
+
+.logo {
+    @include font-style(2.5rem, var(--main-color), 600);
+    margin-right: auto;
+}
+
+.header a {
+    color: white;
+}
+
+.navbar a {
+    position: relative;
+    @include font-style(1.7rem, var(--white-color), 500);
+    margin-right: 3.5rem;
+}
+
+.header.sticky .navbar a {
+    color: var(--text-color);
+}
+
+.header.sticky .navbar a.active {
+    color: var(--main-color);
+}
+
+.navbar a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: .2rem;
+    background: var(--white-color);
+}
+
+.header.sticky .navbar a::before {
+    background: var(--main-color);
+    opacity: .7;
+}
+
+#darkMode-icon {
+    @include font-style(2.4rem, var(--white-color));
+    cursor: pointer;
+}
+
+.header.sticky #darkMode-icon {
+    color: var(--text-color);
+    opacity: .9;
+}
+
+#menu-icon {
+    @include font-style(3.6rem, var(--text-color));
+    display: none;
+}
+
+/*# sourceMappingURL=main.css.map */
