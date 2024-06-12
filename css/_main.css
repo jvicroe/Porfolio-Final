@@ -860,7 +860,25 @@ portfolio {
     border-radius: 20px;
   }
 }
-
-
+@media (max-width: 325px) {
+    .header {
+        padding: 1rem 2%;
+    }
+    .navbar a {
+        font-size: 1.2rem;
+    }
+    .home-content h1 {
+        font-size: 2.8rem;
+    }
+    .about-content h2 {
+        font-size: 2.4rem;
+    }
+    .services-box h3 {
+        font-size: 2.2rem;
+    }
+    .portfolio-layer h4 {
+        font-size: 2.4rem;
+    }
+  }
 
 /*# sourceMappingURL=main.css.map */
