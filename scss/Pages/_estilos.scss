@@ -138,7 +138,6 @@ section {
 }
 
 @keyframes professionRotate {
-
   0%,
   20% {
       transform: rotate(0deg);
@@ -230,6 +229,7 @@ span {
 }
 
 /* Acerca de mí */
+
 .about {
   @include flex-center;
   gap: 4rem;
@@ -258,6 +258,7 @@ span {
 }
 
 /* Servicios */
+
 .services {
   min-height: auto;
   padding-bottom: 10rem;
@@ -304,6 +305,7 @@ span {
 }
 
 /* Portafolio */
+
 .portfolio {
   min-height: auto;
   padding-bottom: 10rem;
@@ -376,6 +378,7 @@ span {
 }
 
 /* Testimonios */
+
 .testimonial-container {
   @include flex-center;
   flex-direction: column;
@@ -447,6 +450,7 @@ span {
 }
 
 /* Contacto */
+
 .contact {
   min-height: auto;
   padding-bottom: 7rem;
